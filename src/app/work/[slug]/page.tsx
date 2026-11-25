@@ -7,6 +7,8 @@ import { PageHero } from "@/components/PageHero";
 import { EnquiryLink } from "@/components/EnquiryLink";
 import { ArrowIcon, buttonStyles } from "@/components/Button";
 import { Rail } from "@/components/Rail";
+import { ProjectStory } from "@/components/ProjectStory";
+import { stories } from "@/lib/stories";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -33,14 +35,20 @@ export default async function ProjectPage({ params }: Props) {
   if (index === -1) notFound();
   const p = projects[index];
   const next = projects[(index + 1) % projects.length];
+  const story = p.story ?? stories[p.slug];
 
   return (
     <>
-      <PageHero back={{ href: "/#work", label: "All work" }}>
+      <PageHero back={{ href: "/work", label: "All work" }}>
         <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <p className="text-ice/70">
-              {p.developer} <span aria-hidden="true" className="mx-2">/</span> {p.location}
+              {p.developer}
+              {p.location ? (
+                <>
+                  <span aria-hidden="true" className="mx-2">/</span> {p.location}
+                </>
+              ) : null}
             </p>
             <h1 className="display-xl mt-4">{p.name}</h1>
             <p className="mt-8 max-w-2xl text-xl leading-relaxed text-ice/85">{p.headline}</p>
@@ -95,6 +103,16 @@ export default async function ProjectPage({ params }: Props) {
                   <li key={s} className="rounded-full bg-mist px-3.5 py-1.5 text-sm text-ink">{s}</li>
                 ))}
               </ul>
+              {p.link ? (
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cobalt"
+                >
+                  View the full project on Behance <ArrowIcon />
+                </a>
+              ) : null}
             </div>
             {p.facts ? (
               <div className="rounded-[1.75rem] bg-midnight p-8 text-white">
@@ -119,6 +137,8 @@ export default async function ProjectPage({ params }: Props) {
           </aside>
         </div>
       </article>
+
+      {story ? <ProjectStory blocks={story} name={p.name} /> : null}
 
       <section className="bg-white py-16">
         <div className="container-fq flex flex-col gap-6 md:flex-row md:items-center md:justify-between">

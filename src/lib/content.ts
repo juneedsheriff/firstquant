@@ -175,9 +175,11 @@ export type Project = {
   slug: string;
   name: string;
   developer: string;
-  location: string;
-  type: "Launch" | "Repositioning" | "Marketing transformation";
+  location?: string;
+  type: "Launch" | "Repositioning" | "Marketing transformation" | "Campaign" | "Brand identity";
   image: string;
+  /** Original showcase, e.g. the Behance project page. */
+  link?: string;
   headline: string;
   summary: string;
   challenge?: string;
@@ -185,7 +187,18 @@ export type Project = {
   facts?: { label: string; value: string }[];
   impact?: string[];
   metric?: { value: string; label: string };
+  /** Visual case study shown below the write-up, in order (mirrors the Behance layout). */
+  story?: StoryBlock[];
 };
+
+/** `alt` falls back to "<project name>, image N" when omitted. */
+export type StoryImage = { src: string; alt?: string; w: number; h: number };
+export type StoryBlock =
+  | { kind: "images"; images: StoryImage[] }
+  /** Body lines: "• " starts a bullet; a short ALL-CAPS line becomes a subheading. */
+  | { kind: "text"; title?: string; body: string[] }
+  /** Video or flipbook iframe; `ratio` is height as a % of width. */
+  | { kind: "embed"; src: string; ratio: number; title: string };
 
 export const projects: Project[] = [
   {
@@ -195,6 +208,7 @@ export const projects: Project[] = [
     location: "Bengaluru",
     type: "Launch",
     image: "/images/projects/life-on-the-green.jpg",
+    link: "https://www.behance.net/gallery/232834009/Life-on-the-green",
     headline: "Sold out in nine months, with prices up 57% along the way.",
     summary:
       "We designed and ran the complete launch: positioning, communication, the digital ecosystem, sales enablement and an integrated campaign rollout. It became one of the brand’s most successful launches.",
@@ -214,6 +228,7 @@ export const projects: Project[] = [
     location: "Whitefield, East Bengaluru",
     type: "Launch",
     image: "/images/projects/euphoria-in-the-east.jpg",
+    link: "https://www.behance.net/gallery/233068295/Euphoria-In-the-East",
     headline: "Turning an unfamiliar corridor into a destination buyers asked for by name.",
     summary:
       "We crafted the brand positioning and go-to-market strategy behind one of Sowparnika’s most recognised launches, and built a new micro-market identity for East Bengaluru in the process.",
@@ -235,6 +250,7 @@ export const projects: Project[] = [
     location: "East Bengaluru",
     type: "Launch",
     image: "/images/projects/peram-eco-city.jpg",
+    link: "https://www.behance.net/gallery/258783767/Peram-Ecocity",
     headline: "Launching one of East Bengaluru’s largest integrated villa communities.",
     summary:
       "We built the complete launch strategy: business planning, product positioning, the pricing framework, communication, campaigns, digital, sales architecture and the channel partner ecosystem.",
@@ -255,6 +271,7 @@ export const projects: Project[] = [
     location: "North Bengaluru",
     type: "Repositioning",
     image: "/images/projects/merusri-antelopes.jpg",
+    link: "https://www.behance.net/gallery/238023113/Merusri-Antelopes",
     headline: "Repositioning a villa community for North Bengaluru’s luxury buyers.",
     summary:
       "We reimagined the project with luxury-first positioning, a refreshed communication architecture and a premium customer experience, repositioning it within North Bengaluru’s luxury market.",
@@ -273,6 +290,7 @@ export const projects: Project[] = [
     location: "Bengaluru",
     type: "Launch",
     image: "/images/projects/merusri-sunscape.jpg",
+    link: "https://www.behance.net/gallery/237117349/Merusri-Sunscape",
     headline: "A complete launch framework for a premium villa community.",
     summary:
       "We conceptualised the full launch framework: market positioning, campaign architecture, the customer experience journey and integrated communication.",
@@ -282,13 +300,66 @@ export const projects: Project[] = [
     slug: "sowparnika-rhythm-of-rain",
     name: "Rhythm of Rain",
     developer: "Sowparnika Projects",
-    location: "Bengaluru",
+    location: "Near Hopefarm, Whitefield, Bengaluru",
     type: "Launch",
     image: "/images/projects/rhythm-of-rain.jpg",
+    link: "https://www.behance.net/gallery/238439765/Sowparnika-RhythmOf-Rain",
     headline: "A lifestyle proposition built for first-home buyers.",
     summary:
       "We developed the project identity, communication platform and launch ecosystem, creating a differentiated proposition that resonated strongly with first-home buyers.",
-    scope: ["Complete go-to-market strategy", "Integrated campaign rollout", "Digital marketing", "CRM", "Lead generation", "Sales enablement"],
+    challenge:
+      "Rhythm of Rain had to be more than another residential community. The brand needed to feel like an experience born from emotion, nature and everyday living in harmony, and to connect with the modern buyer’s search for balance, freshness and a sense of belonging, while carrying the trust of the House of Sowparnika.",
+    scope: ["Project launch strategy", "Brand identity", "Logo design", "Complete go-to-market strategy", "Integrated campaign rollout", "Digital marketing", "CRM", "Lead generation", "Sales enablement"],
+    facts: [
+      { label: "Location", value: "Near Hopefarm, Whitefield" },
+      { label: "Homes", value: "2 and 3 BHK apartments" },
+      { label: "Code name", value: "Cloud Seeding @Hopefarm" },
+    ],
+    story: [
+      {
+        kind: "images",
+        images: [
+          { src: "/images/projects/rhythm-of-rain/01.jpg", alt: "Rhythm of Rain logo in teal on a deep green background", w: 408, h: 514 },
+          { src: "/images/projects/rhythm-of-rain/02.jpg", alt: "Rhythm of Rain logo in gold on an earthy brown background", w: 408, h: 515 },
+        ],
+      },
+      {
+        kind: "text",
+        title: "Each colour tells a story",
+        body: ["For Rhythm of Rain, the palette is more than a set of shades. It invites buyers to feel serenity, warmth and the rhythm of life itself, with hues that evoke fresh rain, earthy stability and the vibrant harmony of nature."],
+      },
+      {
+        kind: "images",
+        images: [{ src: "/images/projects/rhythm-of-rain/03.jpg", alt: "Rhythm of Rain logo as dimensional signage on a sunlit wall", w: 443, h: 330 }],
+      },
+      {
+        kind: "images",
+        images: [
+          { src: "/images/projects/rhythm-of-rain/04.jpg", alt: "Black and white Rhythm of Rain branded mugs", w: 744, h: 495 },
+          { src: "/images/projects/rhythm-of-rain/05.jpg", alt: "Rhythm of Rain feather flags with a geometric rain pattern", w: 700, h: 519 },
+        ],
+      },
+      {
+        kind: "images",
+        images: [
+          { src: "/images/projects/rhythm-of-rain/06.jpg", alt: "Roll-up banner reading “A blend of nature and urban living”", w: 702, h: 503 },
+          { src: "/images/projects/rhythm-of-rain/07.jpg", alt: "Rhythm of Rain logo on an office reception wall", w: 706, h: 529 },
+        ],
+      },
+      {
+        kind: "images",
+        images: [{ src: "/images/projects/rhythm-of-rain/08.jpg", alt: "Launch code name: Cloud Seeding @Hopefarm", w: 840, h: 466 }],
+      },
+      {
+        kind: "text",
+        title: "Code name: Cloud Seeding",
+        body: ["The launch was inspired by the science of creating ideal conditions for growth, where location, design and lifestyle come together to create a thriving community."],
+      },
+      {
+        kind: "images",
+        images: [{ src: "/images/projects/rhythm-of-rain/09.jpg", alt: "Launch hoarding: Rhythm of Rain luxury apartments near Hopefarm, Whitefield, “Welcome to Soulful Living”", w: 1280, h: 640 }],
+      },
+    ],
   },
   {
     slug: "sowparnika-group",
@@ -312,6 +383,335 @@ export const projects: Project[] = [
       { label: "Customer base growth", value: "67%" },
     ],
     metric: { value: "₹179 Cr", label: "marketing-influenced sales" },
+  },
+
+  // Campaign and brand work from https://www.behance.net/balajiramachandra
+  {
+    slug: "sowparnika-ho-ho-homes",
+    name: "Ho Ho Homes",
+    developer: "Sowparnika Projects",
+    location: "Bengaluru",
+    type: "Campaign",
+    image: "/images/projects/sowparnika-ho-ho-homes.jpg",
+    link: "https://www.behance.net/gallery/186761265/HO-HO-HOMES",
+    headline: "A Christmas campaign that made the home search feel rewarding.",
+    summary:
+      "A festive campaign built for Bengaluru home buyers around Christmas Eve, designed to make the buying journey smooth and rewarding rather than a mere transaction.",
+    scope: ["Campaign ideation", "Festive offer communication", "Illustration", "Advertising"],
+  },
+  {
+    slug: "sowparnika-ab-har-ghar-hoga-more-yaa",
+    name: "Ab Har Ghar Hoga More Yaa",
+    developer: "Sowparnika Projects",
+    location: "Bengaluru",
+    type: "Campaign",
+    image: "/images/projects/sowparnika-ab-har-ghar-hoga-more-yaa.jpeg",
+    link: "https://www.behance.net/gallery/180239287/GanpatiBappaMorya-Ab-Har-Ghar-Hoga-More-Yaa",
+    headline: "A Ganesh Chaturthi offer built around the Fortune Modak.",
+    summary:
+      "For Ganesh Chaturthi, buyers unwrapped a Fortune Modak for exclusive offers on their home, with discounts of up to ₹1 lakh on booking alongside no pre-EMI, rental assurance and fully furnished options.",
+    scope: ["Creative direction", "Copywriting", "Festive offer design", "Advertising"],
+  },
+  {
+    slug: "sowparnika-azaadi-ka-mauka",
+    name: "Azaadi Ka Mauka: Quit Rent Movement",
+    developer: "Sowparnika Projects",
+    location: "Bengaluru",
+    type: "Campaign",
+    image: "/images/projects/sowparnika-azaadi-ka-mauka.jpeg",
+    link: "https://www.behance.net/gallery/180238399/AZAADI-KA-MAUKA-QUIT-RENT-MOVEMENT",
+    headline: "An Independence Day call to stop renting and start owning.",
+    summary:
+      "An Independence Day campaign that linked freedom with homeownership, packaging exclusive seasonal deals to make it the right moment to begin the home-buying journey.",
+    scope: ["Campaign concept", "Seasonal offers", "Illustration", "Advertising"],
+  },
+  {
+    slug: "sowparnika-monsoon-makaan-mela",
+    name: "Monsoon Makaan Mela",
+    developer: "Sowparnika Projects",
+    location: "Bengaluru",
+    type: "Campaign",
+    image: "/images/projects/sowparnika-monsoon-makaan-mela.jpg",
+    link: "https://www.behance.net/gallery/175237877/Monsoon-Makaan-Mela",
+    headline: "A monsoon property fair across apartments and villas.",
+    summary:
+      "A seasonal property fair that brought Sowparnika’s apartments and villas together under one monsoon theme, inviting buyers to find their own rain-washed haven.",
+    scope: ["Seasonal campaign", "Portfolio communication", "Illustration"],
+  },
+  {
+    slug: "sowparnika-incredible-property-league",
+    name: "Incredible Property League",
+    developer: "Sowparnika Projects",
+    location: "Bengaluru",
+    type: "Campaign",
+    image: "/images/projects/sowparnika-incredible-property-league.jpeg",
+    link: "https://www.behance.net/gallery/172799497/IPL-with-Sowparnika-Projects",
+    headline: "Riding IPL season with a property league of our own.",
+    summary:
+      "Timed to the cricket season, the Incredible Property League turned home buying into a league format, borrowing the energy of the IPL to drive attention and site visits.",
+    scope: ["Topical campaign", "Event concept", "Illustration", "Social media"],
+  },
+  {
+    slug: "sowparnika-griha-aarambh",
+    name: "Griha Aarambh",
+    developer: "Sowparnika Projects",
+    location: "Bengaluru",
+    type: "Campaign",
+    image: "/images/projects/sowparnika-griha-aarambh.jpeg",
+    link: "https://www.behance.net/gallery/168988939/GRIHA-AARAMBH",
+    headline: "A campaign name built to stand out in a crowded market.",
+    summary:
+      "Griha Aarambh gave Sowparnika a memorable, ownable campaign name that set the brand apart from competitors and explained why buyers should choose Sowparnika homes.",
+    scope: ["Campaign naming", "Brand differentiation", "Advertising"],
+  },
+  {
+    slug: "sowparnika-sunray-knock-out-pre-emi",
+    name: "Sunray: Knock Out Pre-EMI",
+    developer: "Sowparnika Projects",
+    location: "Bengaluru",
+    type: "Campaign",
+    image: "/images/projects/sowparnika-sunray-knock-out-pre-emi.jpeg",
+    link: "https://www.behance.net/gallery/168976699/Knock-Out-PRE-EMI-SOWPARNIKA-SUNRAY",
+    headline: "Turning a routine no pre-EMI offer into a campaign idea.",
+    summary:
+      "We took a standard no pre-EMI offer for Sowparnika Sunray and lifted it into a bolder creative idea that captured the attention of its target buyers.",
+    scope: ["Offer positioning", "Campaign creative", "Advertising"],
+  },
+  {
+    slug: "sowparnika-maha-homes",
+    name: "Maha Homes",
+    developer: "Sowparnika Projects",
+    location: "Bengaluru",
+    type: "Campaign",
+    image: "/images/projects/sowparnika-maha-homes.jpeg",
+    link: "https://www.behance.net/gallery/163811467/Sowparnika-Projects-MAHA-HOMES",
+    headline: "Maximum, Affordable, Homes, Assured: a festive-season promise.",
+    summary:
+      "A festive-season campaign whose name spelled out its promise: more space, a choice of locations and assured, affordable homes across the Sowparnika portfolio.",
+    scope: ["Campaign naming", "Festive communication", "Illustration", "Advertising"],
+  },
+  {
+    slug: "mantri-solitude-whistle-podu",
+    name: "Solitude: Whistle Podu",
+    developer: "Mantri Developers",
+    location: "Chennai",
+    type: "Campaign",
+    image: "/images/projects/mantri-solitude-whistle-podu.jpg",
+    link: "https://www.behance.net/gallery/157105559/Mantri-Solitude-Whistle-Podu",
+    headline: "A Super 7 offer for Chennai, told in the city’s own cricket chant.",
+    summary:
+      "The campaign announced the biggest offer Chennai home seekers had seen and tied it to “Whistle Podu”, the Chennai IPL team’s famous slogan, for an instant local connection. 2 and 3 BHK villas from ₹85 lakh.",
+    scope: ["Campaign concept", "Local cultural hook", "Offer communication", "Advertising"],
+  },
+  {
+    slug: "mantri-signature-villas-xl-xs",
+    name: "Signature Villas: XL Living, XS Price",
+    developer: "Mantri Developers",
+    type: "Campaign",
+    image: "/images/projects/mantri-signature-villas-xl-xs.jpg",
+    link: "https://www.behance.net/gallery/156026165/Mantri-Signature-Villas-XL-Extra-Large-XS-Extra-Small",
+    headline: "Extra-large living at an extra-small price.",
+    summary:
+      "A campaign that set the project’s generous villa community against its price, presenting 3, 4 and 5 BHK villas from ₹2.83 Cr as extra-large living with an extra-small price tag.",
+    scope: ["Campaign concept", "Value positioning", "Advertising"],
+  },
+  {
+    slug: "mantri-serenity-infinity",
+    name: "Serenity: Infinity with Serenity",
+    developer: "Mantri Developers",
+    type: "Campaign",
+    image: "/images/projects/mantri-serenity-infinity.jpg",
+    link: "https://www.behance.net/gallery/155768853/Mantri-Serenity-INFINITY-WITH-SERENITY",
+    headline: "Infinity with Serenity: the campaign for Mantri Serenity.",
+    summary: "Campaign creative and advertising for Mantri Serenity under the line “Infinity with Serenity”.",
+    scope: ["Campaign creative", "Illustration", "Advertising"],
+  },
+  {
+    slug: "axis-aspira-fully-furnished",
+    name: "Aspira: Move In with Only Your Luggage",
+    developer: "Axis Capstone",
+    type: "Campaign",
+    image: "/images/projects/axis-aspira-fully-furnished.jpg",
+    link: "https://www.behance.net/gallery/119472787/Axis-Aspira-Fully-Furnished-Homes",
+    headline: "Selling the last units of a boutique project as fully furnished homes.",
+    summary:
+      "To close out the final units of a luxury boutique project, the campaign led with fully furnished homes at attractive prices. The creative showed a car loaded with luggage under the line “Move in only with luggage”.",
+    scope: ["Inventory closure campaign", "Offer design", "Advertising"],
+  },
+  {
+    slug: "axis-estrella-terraces",
+    name: "Estrella Terraces",
+    developer: "Axis Capstone",
+    type: "Campaign",
+    image: "/images/projects/axis-estrella-terraces.jpg",
+    link: "https://www.behance.net/gallery/119478327/AXIS-ESTRELLA-TERRACES",
+    headline: "Staying connected to your home is now child’s play.",
+    summary:
+      "The project’s key USP was advanced home automation. The campaign showed how easily today’s children handle apps and smartphones, making the point that running your home while you’re away is as simple as a game.",
+    scope: ["USP communication", "Campaign concept", "Illustration"],
+  },
+  {
+    slug: "axis-capstone-csr",
+    name: "CSR Initiative",
+    developer: "Axis Capstone",
+    type: "Campaign",
+    image: "/images/projects/axis-capstone-csr.jpg",
+    link: "https://www.behance.net/gallery/119478709/Axis-Capstone-CSR-INITIATIVE",
+    headline: "Communicating a developer’s corporate social responsibility work.",
+    summary: "Communication design for Axis Capstone’s corporate social responsibility initiative.",
+    scope: ["Corporate communication", "Graphic design"],
+  },
+  {
+    slug: "elv-ark-more-for-less",
+    name: "ARK: More for Less",
+    developer: "ELV",
+    type: "Campaign",
+    image: "/images/projects/elv-ark-more-for-less.jpg",
+    link: "https://www.behance.net/gallery/119465881/ELV-ARK-Campaigns",
+    headline: "Positioning a project as more for less in a competitive market.",
+    summary:
+      "“More for Less” set the project against its competitors by pairing its USPs with its price, shaping how buyers perceived the value of ARK in a crowded market.",
+    scope: ["Positioning", "Campaign concept", "Branding", "Advertising"],
+  },
+  {
+    slug: "elv-ark-site-branding",
+    name: "ARK site branding",
+    developer: "ELV",
+    type: "Campaign",
+    image: "/images/projects/elv-ark-site-branding.jpg",
+    link: "https://www.behance.net/gallery/119466451/ELV-ARK-SITE-BRANDING",
+    headline: "On-site branding that sets the tone for every site visit.",
+    summary: "Site branding for ARK, designed to build acceptance for the project from the moment buyers arrive.",
+    scope: ["Site branding", "Environmental graphics"],
+  },
+  {
+    slug: "elv-ark-social-media",
+    name: "ARK social media",
+    developer: "ELV",
+    type: "Campaign",
+    image: "/images/projects/elv-ark-social-media.jpg",
+    link: "https://www.behance.net/gallery/119466287/ELV-ARK-SOCIAL-MEDIA-CREATIVES",
+    headline: "Social creatives that build awareness and engagement.",
+    summary: "A series of social media creatives for ARK, built to strengthen brand recognition and grow engagement with the target audience.",
+    scope: ["Social media creative", "Brand awareness"],
+  },
+  {
+    slug: "sriven-estates-say-no",
+    name: "Say No",
+    developer: "Sriven Estates",
+    type: "Campaign",
+    image: "/images/projects/sriven-estates-say-no.jpg",
+    link: "https://www.behance.net/gallery/119482453/SRIVEN-ESTATES-Campaign-SAYNO",
+    headline: "The “Say No” campaign for Sriven Estates.",
+    summary: "Campaign creative for Sriven Estates built around the line “Say No”.",
+    scope: ["Campaign creative", "Graphic design"],
+  },
+  {
+    slug: "karmy",
+    name: "Karmy",
+    developer: "Karmy",
+    type: "Brand identity",
+    image: "/images/projects/karmy.jpg",
+    link: "https://www.behance.net/gallery/152833525/KARMY",
+    headline: "A brand for premium acrylic panels new to the Indian market.",
+    summary:
+      "Naming and identity for Karmy, a maker of customised genuine-acrylic panels for living rooms, kitchens, wardrobes, offices and furniture, introducing a new trend to Indian interiors.",
+    scope: ["Naming", "Brand identity", "Photography"],
+  },
+  {
+    slug: "vito-products",
+    name: "Vito Products",
+    developer: "Vito",
+    type: "Brand identity",
+    image: "/images/projects/vito-products.jpg",
+    link: "https://www.behance.net/gallery/152668117/Vito-Products",
+    headline: "A minimalist mark that reads as both organic and technical.",
+    summary: "Logo design for Vito, plus curation of the brand’s website.",
+    scope: ["Logo design", "Website curation"],
+  },
+  {
+    slug: "floorzy-makeover",
+    name: "Floorzy Makeover",
+    developer: "Floorzy Makeover",
+    type: "Brand identity",
+    image: "/images/projects/floorzy-makeover.jpg",
+    link: "https://www.behance.net/gallery/152473847/FLOORZY-MAKEOVER",
+    headline: "A simple, memorable name for a marble polishing specialist.",
+    summary:
+      "Naming and identity for a marble polishing company with a professional team and Italian machinery. The name was kept easy to pronounce and remember, to build trust in the service.",
+    scope: ["Naming", "Brand identity"],
+  },
+  {
+    slug: "dush",
+    name: "DUSH",
+    developer: "DUSH",
+    type: "Brand identity",
+    image: "/images/projects/dush.jpg",
+    link: "https://www.behance.net/gallery/152395847/DUSH",
+    headline: "Durable + Shield: a floor-protection brand built for contractors.",
+    summary:
+      "The name joins DUrable and SHield, promising floors a dependable, long-lasting shield. It was kept short and easy to say for the contractors and workers who buy it.",
+    scope: ["Naming", "Brand identity", "Product design"],
+  },
+  {
+    slug: "maloo-group",
+    name: "Maloo Group",
+    developer: "Maloo Group",
+    type: "Brand identity",
+    image: "/images/projects/maloo-group.jpg",
+    link: "https://www.behance.net/gallery/151855953/Maloo-Group",
+    headline: "A corporate identity for a group of companies.",
+    summary:
+      "A logo for a parent company with several sister concerns. The letters N and M are formed from straight vertical and horizontal strips with curves, expressing a commitment to quality across every business.",
+    scope: ["Corporate identity", "Logo design"],
+  },
+  {
+    slug: "leathercraft",
+    name: "Leathercraft",
+    developer: "Leathercraft Shoes Emporium",
+    location: "Bengaluru",
+    type: "Brand identity",
+    image: "/images/projects/leathercraft.jpg",
+    link: "https://www.behance.net/gallery/121418105/Leathercraft",
+    headline: "Rebranding a popular Bengaluru footwear store.",
+    summary:
+      "A rebrand for Leathercraft, a well-known Bengaluru footwear emporium, using the brand’s history to shape its future: premium, modern and stylish across a wide range of products.",
+    scope: ["Rebranding", "Brand identity", "Advertising"],
+  },
+  {
+    slug: "emerge-projects",
+    name: "Emerge Projects",
+    developer: "Emerge Projects",
+    type: "Brand identity",
+    image: "/images/projects/emerge-projects.jpg",
+    link: "https://www.behance.net/gallery/119520663/Emerge-Projects-Logo-Branding",
+    headline: "A logo and brand strategy for a real estate developer.",
+    summary:
+      "Logo and branding for Emerge Projects that clarifies the company’s purpose, values and promise, helping buyers recognise the brand and choose it over the competition.",
+    scope: ["Logo design", "Brand strategy"],
+  },
+  {
+    slug: "mysimbha",
+    name: "Mysimbha",
+    developer: "Mysimbha",
+    type: "Brand identity",
+    image: "/images/projects/mysimbha.jpg",
+    link: "https://www.behance.net/gallery/119479645/Mysimbha",
+    headline: "It’s all about you: naming a brand of custom handmade products.",
+    summary: "Name branding and logo design for Mysimbha, a brand of self-expressive, custom and handmade products.",
+    scope: ["Naming", "Logo design"],
+  },
+  {
+    slug: "prodigies-international-school",
+    name: "The Prodigies International School",
+    developer: "The Prodigies International School",
+    type: "Brand identity",
+    image: "/images/projects/prodigies-international-school.jpg",
+    link: "https://www.behance.net/gallery/119440555/THE-PRODIGIES-INTERNATIONAL-SCHOOL",
+    headline: "Carrying a school’s motto through every piece of communication.",
+    summary:
+      "Branding communication for an international school, built around its mission, its passion for learning and its pursuit of excellence.",
+    scope: ["Brand communication", "Illustration", "Advertising"],
   },
 ];
 
