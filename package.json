@@ -1,0 +1,27 @@
+{
+  "name": "firstquant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "First Quant — strategic growth partners for real estate developers.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "lucide-react": "1.69.0",
+    "next": "16.4.5",
+    "react": "19.2.9",
+    "react-dom": "19.2.9"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.4",
+    "@types/node": "24.19.2",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.3",
+    "tailwindcss": "4.3.4",
+    "typescript": "5.9.3"
+  },
+  "engines": { "node": ">=20.9" }
+}

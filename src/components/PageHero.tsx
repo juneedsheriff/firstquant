@@ -1,0 +1,16 @@
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+
+export function PageHero({ back, children }: { back: { href: string; label: string }; children: React.ReactNode }) {
+  return (
+    <section className="relative overflow-hidden bg-midnight pb-16 pt-32 text-white md:pb-24 md:pt-40">
+      <div aria-hidden="true" className="absolute -left-40 top-0 size-[36rem] rounded-full bg-cobalt/30 blur-[140px]" />
+      <div className="container-fq relative">
+        <Link href={back.href} className="inline-flex items-center gap-2 text-sm font-semibold text-ice/75 hover:text-white">
+          <ArrowLeft aria-hidden="true" className="size-4" /> {back.label}
+        </Link>
+        {children}
+      </div>
+    </section>
+  );
+}

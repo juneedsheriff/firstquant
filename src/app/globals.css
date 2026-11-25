@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* Rupee sign (and other extended Latin) from Archivo, used as a fallback for both families. */
+@font-face {
+  font-family: "FQ Extended";
+  src: url("/fonts/archivo-latin-ext-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+1E00-1EFF, U+20A0-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@theme {
+  --color-midnight: #050e24;
+  --color-midnight-2: #0a1838;
+  --color-cobalt: #0a3fd8;
+  --color-signal: #1c7cff;
+  --color-mist: #eef2f9;
+  --color-steel: #5b6782;
+  --color-ice: #c9d6f2;
+  --color-ink: #0c1730;
+
+  --font-display: var(--font-archivo), "FQ Extended", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-hanken), "FQ Extended", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-mist text-ink font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: var(--color-signal);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-stretch: 118%;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+  font-size: clamp(2.75rem, 7.4vw, 7.25rem);
+}
+@utility display-lg {
+  font-family: var(--font-display);
+  font-stretch: 114%;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  font-size: clamp(2.1rem, 4.6vw, 4.25rem);
+}
+@utility display-md {
+  font-family: var(--font-display);
+  font-stretch: 110%;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+}
+@utility container-fq {
+  width: 100%;
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+/* The dotted rail from the brand footer art, used as a section marker. */
+@utility rail {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Hero load sequence — the page's one orchestrated motion moment. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes reveal-img {
+  from { clip-path: inset(100% 0 0 0); transform: scale(1.08); }
+  to { clip-path: inset(0 0 0 0); transform: scale(1); }
+}
+@keyframes dot-pulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.anim-rise {
+  opacity: 0;
+  animation: rise 1s var(--ease-out-expo) forwards;
+}
+.anim-reveal {
+  animation: reveal-img 1.4s var(--ease-out-expo) both;
+}
+.anim-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+/* Scroll reveal (applied by <Reveal>), kept subtle and only on key blocks. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .anim-rise, [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .anim-marquee { animation: none !important; }
+}
