@@ -2,7 +2,7 @@
 
 import { useId, useRef, useState } from "react";
 import { quant } from "@/lib/content";
-import { Rail } from "../Rail";
+import { Kicker } from "../SectionHeading";
 import { Reveal } from "../Reveal";
 
 export function Approach() {
@@ -30,7 +30,7 @@ export function Approach() {
       <div className="container-fq">
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Rail className="mb-7" />
+            <Kicker section="approach" tone="dark" className="mb-6" />
             <h2 id="approach-title" className="display-lg">
               How we work is in our name
             </h2>
@@ -66,12 +66,12 @@ export function Approach() {
               >
                 <span
                   aria-hidden="true"
-                  className={`font-display text-[clamp(3.5rem,15vw,13rem)] font-bold leading-[0.85] tracking-tight transition-all duration-500 [font-stretch:125%] ${
+                  className={`font-display text-[clamp(3.5rem,15vw,13rem)] font-semibold leading-[0.85] tracking-tight transition-colors duration-300 [font-stretch:125%] ${
                     selected
-                      ? "bg-gradient-to-br from-signal to-cobalt bg-clip-text text-transparent"
+                      ? "text-signal"
                       : done
                         ? "text-white/25"
-                        : "text-transparent [-webkit-text-stroke:1.5px_rgba(201,214,242,0.35)] group-hover:[-webkit-text-stroke-color:rgba(201,214,242,0.8)]"
+                        : "text-transparent [-webkit-text-stroke:1.5px_color-mix(in_oklab,var(--color-ice)_35%,transparent)] group-hover:[-webkit-text-stroke-color:color-mix(in_oklab,var(--color-ice)_80%,transparent)]"
                   }`}
                 >
                   {q.letter}
@@ -85,7 +85,7 @@ export function Approach() {
                 </span>
                 <span
                   aria-hidden="true"
-                  className={`absolute inset-x-0 -bottom-px h-[3px] origin-left bg-signal transition-transform duration-500 ${
+                  className={`absolute inset-x-0 -bottom-px h-[3px] origin-left bg-signal transition-transform duration-300 ${
                     selected ? "scale-x-100" : "scale-x-0"
                   }`}
                 />
@@ -107,7 +107,7 @@ export function Approach() {
             <h3 className="display-md mt-3">{step.word}</h3>
             <p className="mt-4 max-w-md text-xl leading-relaxed text-ice/85">{step.summary}</p>
           </div>
-          <ul key={step.word + "-list"} className="grid gap-px self-start overflow-hidden rounded-[1.5rem] bg-white/10 sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
+          <ul key={step.word + "-list"} className="grid gap-px self-start overflow-hidden rounded-xl bg-white/10 sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
             {step.points.map((pt, i) => (
               <li
                 key={pt}
@@ -123,8 +123,8 @@ export function Approach() {
         <div className="mt-12 flex items-center gap-4">
           <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/10">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-cobalt to-signal transition-[width] duration-700 ease-out"
-              style={{ width: `${((active + 1) / quant.length) * 100}%` }}
+              className="h-full origin-left rounded-full bg-signal transition-transform duration-500 ease-[var(--ease-out-expo)]"
+              style={{ transform: `scaleX(${(active + 1) / quant.length})` }}
             />
           </div>
           <button

@@ -54,8 +54,8 @@ export default async function ProjectPage({ params }: Props) {
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ice/85">{p.headline}</p>
           </div>
           {p.metric ? (
-            <div className="rounded-[1.75rem] border border-white/10 bg-white/5 px-7 py-5 lg:col-span-4 lg:col-start-9">
-              <p className="font-display text-4xl font-bold md:text-5xl tracking-tight [font-stretch:118%]">{p.metric.value}</p>
+            <div className="rounded-2xl border border-white/10 bg-white/5 px-7 py-5 lg:col-span-4 lg:col-start-9">
+              <p className="font-display text-4xl font-semibold tabular-nums tracking-tight md:text-5xl [font-stretch:118%]">{p.metric.value}</p>
               <p className="mt-1 text-ice/80">{p.metric.label}</p>
             </div>
           ) : null}
@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: Props) {
       <article className="bg-mist py-12 md:py-16">
         <div className="container-fq grid gap-10 md:gap-14 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] bg-ice">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-ice">
               <Image src={p.image} alt={`${p.name} by ${p.developer}`} fill priority sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover" />
             </div>
 
@@ -95,7 +95,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
 
           <aside className="space-y-6 lg:col-span-4 lg:col-start-9">
-            <div className="rounded-[1.75rem] bg-white p-6 sm:p-8">
+            <div className="rounded-2xl bg-white p-6 sm:p-8">
               <Rail className="mb-5" dots={6} />
               <h2 className="text-lg font-semibold text-ink">Scope</h2>
               <ul className="mt-5 flex flex-wrap gap-2">
@@ -115,7 +115,7 @@ export default async function ProjectPage({ params }: Props) {
               ) : null}
             </div>
             {p.facts ? (
-              <div className="rounded-[1.75rem] bg-midnight p-6 sm:p-8 text-white">
+              <div className="rounded-2xl bg-midnight p-6 sm:p-8 text-white">
                 <h2 className="text-lg font-semibold">{p.type === "Marketing transformation" ? "FY23–24 and FY24–25" : "Project facts"}</h2>
                 <dl className="mt-5 divide-y divide-white/10">
                   {p.facts.map((f) => (
@@ -127,7 +127,7 @@ export default async function ProjectPage({ params }: Props) {
                 </dl>
               </div>
             ) : null}
-            <div className="rounded-[1.75rem] bg-cobalt p-6 sm:p-8 text-white">
+            <div className="rounded-2xl bg-cobalt p-6 sm:p-8 text-white">
               <h2 className="text-lg font-semibold">Have a project like this?</h2>
               <p className="mt-2 text-white/80">Tell us where it is and what success looks like.</p>
               <EnquiryLink type="developer" className="group mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 font-semibold text-cobalt">

@@ -3,10 +3,9 @@
  * into fading dots. Used as the section marker in place of text labels.
  */
 export function Rail({ dots = 9, className = "", tone = "dark" }: { dots?: number; className?: string; tone?: "dark" | "light" }) {
-  const bar = tone === "light" ? "from-cobalt to-signal" : "from-cobalt to-signal";
   return (
     <span aria-hidden="true" className={`rail ${className}`}>
-      <span className={`h-[5px] w-10 rounded-full bg-gradient-to-r ${bar}`} />
+      <span className="h-[5px] w-10 rounded-full bg-signal" />
       {Array.from({ length: dots }).map((_, i) => (
         <span
           key={i}

@@ -5,7 +5,7 @@ import { CheckCircle2, Loader2, Mail, MapPin, Phone } from "lucide-react";
 import { site } from "@/lib/content";
 import { enquiryTypes, projectStages, validateEnquiry, type EnquiryPayload, type EnquiryTypeId, type FieldErrors } from "@/lib/enquiry";
 import { ENQUIRY_EVENT } from "../EnquiryLink";
-import { Rail } from "../Rail";
+import { Kicker } from "../SectionHeading";
 
 const intros: Record<EnquiryTypeId, { heading: string; prompt: string; button: string }> = {
   developer: {
@@ -113,7 +113,7 @@ export function Contact() {
     <section id="contact" aria-labelledby="contact-title" className="bg-white py-16 md:py-24 lg:py-36">
       <div className="container-fq grid gap-10 md:gap-16 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
-          <Rail className="mb-7" />
+          <Kicker section="contact" className="mb-6" />
           <h2 id="contact-title" className="display-lg text-ink">
             Every project has value. Let’s find yours.
           </h2>
@@ -137,7 +137,7 @@ export function Contact() {
           </ul>
         </div>
 
-        <div className="rounded-[2rem] bg-mist p-6 sm:p-8 md:p-12 lg:col-span-7">
+        <div className="rounded-2xl bg-mist p-6 sm:p-8 md:p-12 lg:col-span-7">
           {status === "sent" ? (
             <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center">
               <CheckCircle2 aria-hidden="true" className="size-12 text-cobalt" />

@@ -13,7 +13,7 @@ export function Careers() {
         <SectionHeading id="careers-title" tone="dark" title="Careers" intro={careers.intro} />
 
         <div className="mt-10 md:mt-16 grid gap-6 lg:mt-20 lg:grid-cols-12">
-          <Reveal className="relative min-h-80 overflow-hidden rounded-[2rem] lg:col-span-4">
+          <Reveal className="relative min-h-80 overflow-hidden rounded-2xl lg:col-span-4">
             <Image
               src="/images/architecture/cantilever.jpg"
               alt=""

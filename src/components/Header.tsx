@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { navigation } from "@/lib/content";
@@ -11,6 +12,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -45,8 +47,8 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-[background-color,box-shadow] duration-500 ${
-        scrolled || open ? "bg-midnight/90 shadow-[0_1px_0_rgba(201,214,242,0.08)] backdrop-blur-xl" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-[background-color,box-shadow] duration-300 ${
+        scrolled || open ? "bg-midnight/90 shadow-[0_1px_0_color-mix(in_oklab,var(--color-ice)_8%,transparent)] backdrop-blur-xl" : "bg-transparent"
       }`}
     >
       <a
@@ -62,20 +64,21 @@ export function Header() {
           <ul className="flex items-center gap-1">
             {navigation.map((item) => {
               const id = item.href.split("#")[1];
-              const isActive = active === id;
+              // Section links light up while their section is in view; page links while you are on that page.
+              const isActive = id ? pathname === "/" && active === id : pathname === item.href || pathname.startsWith(`${item.href}/`);
               return (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     aria-current={isActive ? "true" : undefined}
-                    className={`relative rounded-full px-3.5 py-2 text-[0.92rem] font-medium transition-colors ${
+                    className={`relative whitespace-nowrap rounded-full px-2.5 py-2 text-[0.92rem] font-medium xl:px-3.5 transition-colors ${
                       isActive ? "text-white" : "text-ice/70 hover:text-white"
                     }`}
                   >
                     {item.label}
                     <span
                       aria-hidden="true"
-                      className={`absolute inset-x-3.5 -bottom-0.5 h-px origin-left bg-signal transition-transform duration-500 ${
+                      className={`absolute inset-x-2.5 -bottom-0.5 h-px xl:inset-x-3.5 origin-left bg-signal transition-transform duration-200 ${
                         isActive ? "scale-x-100" : "scale-x-0"
                       }`}
                     />
@@ -89,7 +92,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <EnquiryLink
             type="developer"
-            className="hidden rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-midnight transition-colors hover:bg-signal hover:text-white sm:inline-flex"
+            className="hidden whitespace-nowrap rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-midnight transition-colors hover:bg-signal hover:text-white sm:inline-flex"
           >
             Discuss a project
           </EnquiryLink>

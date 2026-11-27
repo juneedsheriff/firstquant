@@ -18,6 +18,7 @@ export function Projects() {
     <section id="work" aria-labelledby="work-title" className="bg-mist py-16 md:py-24 lg:py-36">
       <div className="container-fq">
         <SectionHeading
+          kicker="work"
           id="work-title"
           title="Project transformations"
           intro="Launches, repositionings and portfolio mandates for Bengaluru developers. Each one started with a business problem, not a campaign brief."
@@ -86,7 +87,7 @@ function ProjectCard({ project: p, priority, compact }: { project: Project; prio
   return (
     <Link
       href={`/work/${p.slug}`}
-      className={`group flex h-full overflow-hidden bg-white ${compact ? "flex-row rounded-2xl sm:flex-col sm:rounded-[1.75rem]" : "flex-col rounded-[1.5rem] md:rounded-[1.75rem]"} transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgba(5,14,36,0.35)]`}
+      className={`group flex h-full overflow-hidden bg-white ${compact ? "flex-row rounded-2xl sm:flex-col sm:rounded-2xl" : "flex-col rounded-xl md:rounded-2xl"} transition-shadow duration-200 hover:shadow-[0_8px_24px_color-mix(in_oklab,var(--color-midnight)_8%,transparent)]`}
     >
       <div className={`relative overflow-hidden ${compact ? "w-32 shrink-0 sm:aspect-[16/10] sm:w-auto" : "aspect-[16/10]"}`}>
         <Image
@@ -95,11 +96,11 @@ function ProjectCard({ project: p, priority, compact }: { project: Project; prio
           fill
           priority={priority}
           sizes={compact ? "(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 8rem" : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"}
-          className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
+          className="object-cover"
         />
         {p.metric ? (
-          <div className={`absolute left-3 top-3 rounded-2xl bg-midnight/85 px-3.5 py-2.5 text-white backdrop-blur-md md:left-4 md:top-4 md:px-4 md:py-3 ${compact ? "hidden sm:block" : ""}`}>
-            <p className="font-display text-xl font-bold md:text-2xl leading-none [font-stretch:115%]">{p.metric.value}</p>
+          <div className={`absolute left-3 top-3 rounded-2xl bg-midnight px-3.5 py-2.5 text-white md:left-4 md:top-4 md:px-4 md:py-3 ${compact ? "hidden sm:block" : ""}`}>
+            <p className="font-display text-xl font-semibold tabular-nums leading-none md:text-2xl [font-stretch:115%]">{p.metric.value}</p>
             <p className="mt-1 text-xs text-ice/80">{p.metric.label}</p>
           </div>
         ) : null}

@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { leaders, site } from "@/lib/content";
+import { themeBootScript } from "@/lib/theme";
 import "./globals.css";
 
 // Self-hosted variable fonts (SIL Open Font License) — no build-time network access needed.
@@ -81,7 +82,11 @@ const orgSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${archivo.variable} ${hanken.variable}`}>
+    // suppressHydrationWarning: the theme script sets data-theme on <html> before React loads.
+    <html lang="en-IN" className={`${archivo.variable} ${hanken.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+      </head>
       <body>
         <noscript>
           <style>{`[data-reveal],.anim-rise{opacity:1!important;transform:none!important}`}</style>

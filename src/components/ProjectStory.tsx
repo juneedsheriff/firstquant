@@ -28,7 +28,7 @@ export function ProjectStory({ blocks, name }: { blocks: StoryBlock[]; name: str
                       sizes={count === 1 ? "(min-width: 1024px) 64rem, 100vw" : "(min-width: 1024px) 22rem, (min-width: 768px) 50vw, 100vw"}
                       // Small single images stay near their real size instead of stretching and blurring.
                       style={count === 1 ? { maxWidth: Math.round(img.w * 1.25) } : undefined}
-                      className="mx-auto h-auto w-full rounded-2xl bg-mist md:rounded-[1.5rem]"
+                      className="mx-auto h-auto w-full rounded-2xl bg-mist md:rounded-xl"
                     />
                   );
                 })}
@@ -42,6 +42,14 @@ export function ProjectStory({ blocks, name }: { blocks: StoryBlock[]; name: str
 }
 
 const isSubheading = (line: string) => line.length <= 40 && /[A-Z]/.test(line) && !/[a-z]/.test(line);
+
+// Behance subheads are set in capitals; show them in sentence case, keeping acronyms such as TG.
+const ACRONYMS = new Set(["TG", "USP", "CSR", "BHK"]);
+const sentenceCase = (line: string) =>
+  line
+    .toLowerCase()
+    .replace(/\b[a-z]+\b/g, (w) => (ACRONYMS.has(w.toUpperCase()) ? w.toUpperCase() : w))
+    .replace(/^[^a-z]*[a-z]/, (m) => m.toUpperCase());
 
 function TextBlock({ block }: { block: Extract<StoryBlock, { kind: "text" }> }) {
   const long = block.body.length > 3 || block.body.some((l) => l.startsWith("•"));
@@ -70,7 +78,7 @@ function TextBlock({ block }: { block: Extract<StoryBlock, { kind: "text" }> }) 
               ))}
             </ul>
           ) : isSubheading(part) ? (
-            <h4 key={i} className="pt-4 text-sm font-semibold uppercase tracking-[0.14em] text-ink">{part}</h4>
+            <h4 key={i} className="pt-4 text-base font-semibold text-ink">{sentenceCase(part)}</h4>
           ) : (
             <p key={i}>{part}</p>
           ),
@@ -86,7 +94,7 @@ function EmbedBlock({ block, name }: { block: Extract<StoryBlock, { kind: "embed
   return (
     <div className="mx-auto w-full" style={{ maxWidth: portrait ? 420 : undefined }}>
       <div
-        className="relative overflow-hidden rounded-[1.5rem] bg-midnight"
+        className="relative overflow-hidden rounded-xl bg-midnight"
         style={audio ? { height: 64 } : { paddingBottom: `${block.ratio}%` }}
       >
         <iframe

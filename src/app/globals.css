@@ -23,7 +23,71 @@
   --font-display: var(--font-archivo), "FQ Extended", ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-hanken), "FQ Extended", ui-sans-serif, system-ui, sans-serif;
 
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* One easing curve for every transition and entrance. */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * Colour themes. Midnight (above) is the default; Royal, Graphite and Light are below.
+ * Choose one in the URL with ?theme=royal, ?color=royal or #royal (?theme=midnight resets).
+ * Dark themes keep a dark header and hero so the logo's white "FIRST" stays legible;
+ * Light swaps in the navy-"FIRST" logo.
+ */
+
+/* Royal: the logo's deep royal blue for dark surfaces, logo azure as the accent. */
+:root[data-theme="royal"] {
+  --color-midnight: #071a63;
+  --color-midnight-2: #0c2680;
+  --color-cobalt: #0040d0;
+  --color-signal: #1f8bff;
+  --color-mist: #f1f5ff;
+  --color-steel: #4f5f8a;
+  --color-ice: #cfdcff;
+  --color-ink: #0a1550;
+}
+/* Graphite: charcoal surfaces and warm off-white, with the logo's blue as the only colour. */
+:root[data-theme="graphite"] {
+  --color-midnight: #111317;
+  --color-midnight-2: #1a1d23;
+  --color-cobalt: #0050e0;
+  --color-signal: #1a7dff;
+  --color-mist: #f4f3ef;
+  --color-steel: #5d6068;
+  --color-ice: #d6d9e0;
+  --color-ink: #16181d;
+}
+
+/*
+ * Light: a fully light version in the logo's own colours (royal #0040d0, azure #0066ee,
+ * deep-royal navy text). Former dark sections become a soft logo-blue tint.
+ */
+:root[data-theme="light"] {
+  --color-midnight: #eaf1ff;
+  --color-midnight-2: #dde8fd;
+  --color-cobalt: #0040d0;
+  --color-signal: #0066ee;
+  --color-mist: #f5f8ff;
+  --color-steel: #4a5878;
+  --color-ice: #41507a;
+  --color-ink: #0b1a4a;
+}
+/* Text that was white on dark surfaces turns navy there… */
+:root[data-theme="light"] :is([class*="bg-midnight"], header) {
+  --color-white: #0b1a4a;
+}
+/* …but stays white on anything filled with the logo blues (buttons, blue cards). */
+:root[data-theme="light"] :is(.bg-signal, .bg-cobalt) {
+  --color-white: #ffffff;
+}
+/* The logo's white "FIRST" needs the navy version on light surfaces. */
+.logo-on-light {
+  display: none;
+}
+:root[data-theme="light"] .logo-on-dark {
+  display: none;
+}
+:root[data-theme="light"] .logo-on-light {
+  display: block;
 }
 
 @layer base {
@@ -58,15 +122,15 @@
 @utility display-xl {
   font-family: var(--font-display);
   font-stretch: 118%;
-  font-weight: 700;
-  letter-spacing: -0.035em;
+  font-weight: 600;
+  letter-spacing: -0.03em;
   line-height: 0.95;
   font-size: clamp(2.75rem, 7.4vw, 7.25rem);
 }
 @utility display-lg {
   font-family: var(--font-display);
   font-stretch: 114%;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.02;
   font-size: clamp(2.1rem, 4.6vw, 4.25rem);
@@ -95,37 +159,39 @@
 
 /* Hero load sequence — the page's one orchestrated motion moment. */
 @keyframes rise {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: none; }
 }
 @keyframes reveal-img {
-  from { clip-path: inset(100% 0 0 0); transform: scale(1.08); }
-  to { clip-path: inset(0 0 0 0); transform: scale(1); }
-}
-@keyframes dot-pulse {
-  0%, 100% { opacity: 0.25; }
-  50% { opacity: 1; }
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
 }
 .anim-rise {
   opacity: 0;
-  animation: rise 1s var(--ease-out-expo) forwards;
+  animation: rise 0.5s var(--ease-out-expo) forwards;
 }
 .anim-reveal {
-  animation: reveal-img 1.4s var(--ease-out-expo) both;
+  animation: reveal-img 0.5s var(--ease-out-expo) both;
 }
-.anim-marquee {
-  animation: marquee 40s linear infinite;
+
+/* Client logo strip: two identical sets slide left by one set's width, so the loop is seamless. */
+@keyframes logo-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.anim-logos {
+  animation: logo-marquee 80s linear infinite;
+}
+.logo-strip:hover .anim-logos,
+.logo-strip:focus-within .anim-logos {
+  animation-play-state: paused;
 }
 
 /* Scroll reveal (applied by <Reveal>), kept subtle and only on key blocks. */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+  transform: translateY(12px);
+  transition: opacity 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
 }
 [data-reveal="in"] {
   opacity: 1;
@@ -138,7 +204,8 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
   }
   .anim-rise, [data-reveal] { opacity: 1 !important; transform: none !important; }
-  .anim-marquee { animation: none !important; }
+  .anim-logos { animation: none !important; }
 }

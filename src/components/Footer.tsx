@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { navigation, projects, quant, site, transformations } from "@/lib/content";
+import { navigation, projects, site, transformations } from "@/lib/content";
 import { Logo } from "./Logo";
 import { EnquiryLink } from "./EnquiryLink";
 import { ArrowIcon, buttonStyles } from "./Button";
@@ -39,15 +39,6 @@ export function Footer() {
         <div className="lg:col-span-4">
           <Logo className="h-10 w-auto" />
           <p className="mt-6 max-w-xs leading-relaxed">{site.tagline}. A Brim First company.</p>
-          <p className="mt-6 flex max-w-xs flex-wrap gap-y-1 font-display text-sm font-semibold text-white [font-stretch:115%]">
-            {quant.map((q, i) => (
-              <span key={q.word}>
-                <span className="text-signal">{q.letter}</span>
-                {q.word.slice(1)}
-                {i < quant.length - 1 ? <span className="px-1.5 text-ice/40" aria-hidden="true">.</span> : null}
-              </span>
-            ))}
-          </p>
         </div>
 
         <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:col-span-1 md:grid-cols-2 lg:col-span-5 lg:grid-cols-3">
@@ -66,7 +57,7 @@ export function Footer() {
               {transformations.map((t) => (
                 <li key={t.id}><Link href="/#services" className="hover:text-white">{t.title.replace(" transformation", "")}</Link></li>
               ))}
-              <li><Link href="/#services" className="hover:text-white">Architecture</Link></li>
+              <li><Link href="/#architecture" className="hover:text-white">Architecture</Link></li>
             </ul>
           </div>
           <div>

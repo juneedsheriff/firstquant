@@ -6,27 +6,33 @@ import { SectionHeading } from "../SectionHeading";
 import { Reveal } from "../Reveal";
 import { ArrowIcon } from "../Button";
 
-export function Insights() {
+/** On its own page (`standalone`) the page header carries the title, so the section heading is skipped. */
+export function Insights({ standalone = false }: { standalone?: boolean }) {
   const [lead, ...rest] = insights;
   return (
-    <section id="insights" aria-labelledby="insights-title" className="bg-mist py-16 md:py-24 lg:py-36">
+    <section
+      id="insights"
+      aria-labelledby={standalone ? undefined : "insights-title"}
+      aria-label={standalone ? "Articles" : undefined}
+      className={`bg-mist ${standalone ? "py-14 md:py-20" : "py-16 md:py-24 lg:py-36"}`}
+    >
       <div className="container-fq">
-        <SectionHeading
+        {standalone ? null : <SectionHeading
           id="insights-title"
           title="Market insights"
           intro="Notes from the field on positioning, pricing and launching projects in Bengaluru’s residential market."
-        />
+        />}
 
-        <div className="mt-10 md:mt-16 grid gap-6 lg:mt-20 lg:grid-cols-12">
+        <div className={`grid gap-6 lg:grid-cols-12 ${standalone ? "" : "mt-10 md:mt-16 lg:mt-20"}`}>
           <Reveal className="lg:col-span-7">
             <Link href={`/insights/${lead.slug}`} className="group block">
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem]">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
                 <Image
                   src={lead.image}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 55vw, 100vw"
-                  className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.03]"
+                  className="object-cover"
                 />
               </div>
               <p className="mt-6 text-sm text-steel">
@@ -44,7 +50,7 @@ export function Insights() {
               <Reveal key={a.slug} delay={100 + i * 100}>
                 <Link
                   href={`/insights/${a.slug}`}
-                  className="group grid gap-5 rounded-[2rem] bg-white p-5 sm:grid-cols-[10rem_1fr] md:p-6"
+                  className="group grid gap-5 rounded-2xl bg-white p-5 sm:grid-cols-[10rem_1fr] md:p-6"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:aspect-square">
                     <Image src={a.image} alt="" fill sizes="(min-width: 640px) 160px, 100vw" className="object-cover" />
