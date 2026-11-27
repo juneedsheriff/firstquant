@@ -14,15 +14,17 @@ export default function WorkPage() {
   return (
     <>
       <PageHero back={{ href: "/#work", label: "Home" }}>
-        <h1 className="display-xl mt-10">Our work</h1>
-        <p className="mt-8 max-w-2xl text-xl leading-relaxed text-ice/85">
-          All {projects.length} projects: launches, repositionings, campaigns and brand identities for Bengaluru
-          developers.
-        </p>
+        <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-10">
+          <h1 className="display-md">Our work</h1>
+          <p className="max-w-xl text-ice/80 md:text-right">
+            All {projects.length} projects: launches, repositionings, campaigns and brand identities for Bengaluru
+            developers.
+          </p>
+        </div>
       </PageHero>
-      <section aria-label="All projects" className="bg-mist pb-24 pt-4 md:pb-36">
+      <section aria-label="All projects" className="bg-mist pb-20 pt-2 md:pb-28">
         <div className="container-fq">
-          <ProjectGrid />
+          <ProjectGrid compact />
         </div>
       </section>
     </>

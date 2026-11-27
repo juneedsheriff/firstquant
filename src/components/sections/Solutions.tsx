@@ -22,7 +22,7 @@ function Row({ title, items }: { title: string; items: string[] }) {
 
 export function Solutions() {
   return (
-    <section aria-labelledby="solutions-title" className="bg-midnight py-24 text-white md:py-36">
+    <section aria-labelledby="solutions-title" className="bg-midnight py-16 text-white md:py-24 lg:py-36">
       <div className="container-fq">
         <SectionHeading
           id="solutions-title"
@@ -31,7 +31,7 @@ export function Solutions() {
           intro="Strategy decides what to build and how to position it. Execution fills the funnel and closes it. We hold both, so the brand promise and the sales conversation never drift apart."
         />
 
-        <div className="mt-16 grid gap-16 lg:mt-24 lg:grid-cols-2 lg:gap-12">
+        <div className="mt-10 md:mt-16 grid gap-10 md:gap-16 lg:mt-24 lg:grid-cols-2 lg:gap-12">
           <Reveal>
             <div className="mb-2 flex items-baseline justify-between">
               <h3 className="text-sm font-semibold text-signal">Strategy</h3>

@@ -15,9 +15,9 @@ const mandate = [
 
 export function About() {
   return (
-    <section id="about" aria-labelledby="about-title" className="bg-mist py-24 md:py-36">
+    <section id="about" aria-labelledby="about-title" className="bg-mist py-16 md:py-24 lg:py-36">
       <div className="container-fq">
-        <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
+        <div className="grid gap-10 md:gap-16 lg:grid-cols-12 lg:gap-10">
           <Reveal className="lg:col-span-7">
             <Rail className="mb-7" />
             <h2 id="about-title" className="display-lg text-ink">
@@ -34,7 +34,7 @@ export function About() {
               </p>
             </div>
 
-            <div className="mt-14 rounded-[1.75rem] bg-white p-8 md:p-10">
+            <div className="mt-10 md:mt-14 rounded-[1.75rem] bg-white p-8 md:p-10">
               <h3 className="text-xl font-semibold text-ink">One integrated growth model</h3>
               <p className="mt-2 max-w-lg text-steel">
                 Whether we’re reviving an underperforming asset, repositioning an established brand or launching a
@@ -62,7 +62,7 @@ export function About() {
               />
               <div aria-hidden="true" className="absolute inset-0 bg-cobalt/25 mix-blend-multiply" />
             </div>
-            <figure className="relative -mt-24 ml-6 mr-0 rounded-[1.75rem] bg-midnight p-8 text-white shadow-2xl shadow-midnight/30 md:-mt-32 md:ml-12">
+            <figure className="relative -mt-24 ml-6 mr-0 rounded-[1.75rem] bg-midnight p-6 sm:p-8 text-white shadow-2xl shadow-midnight/30 md:-mt-32 md:ml-12">
               <blockquote>
                 <p className="font-display text-2xl font-semibold leading-snug [font-stretch:110%]">
                   Success is never determined by location alone. It’s shaped by strategy, perception, timing and
@@ -74,7 +74,7 @@ export function About() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-24 grid gap-px overflow-hidden rounded-[1.75rem] bg-ink/10 md:grid-cols-3">
+        <Reveal className="mt-14 md:mt-24 grid gap-px overflow-hidden rounded-[1.75rem] bg-ink/10 md:grid-cols-3">
           {beliefs.map((b) => (
             <p
               key={b}

@@ -8,7 +8,7 @@ import { ArrowIcon } from "../Button";
 
 export function Network() {
   return (
-    <section id="network" aria-labelledby="network-title" className="bg-white py-24 md:py-36">
+    <section id="network" aria-labelledby="network-title" className="bg-white py-16 md:py-24 lg:py-36">
       <div className="container-fq">
         <SectionHeading
           id="network-title"
@@ -16,7 +16,7 @@ export function Network() {
           intro="We work with a small number of developers at a time, and with the channel partners who help their projects reach the right buyers."
         />
 
-        <div className="mt-16 grid gap-6 lg:mt-20 lg:grid-cols-12">
+        <div className="mt-10 md:mt-16 grid gap-6 lg:mt-20 lg:grid-cols-12">
           <Reveal className="rounded-[2rem] bg-mist p-8 md:p-12 lg:col-span-7">
             <h3 className="text-xl font-semibold text-ink">Developers we partner with</h3>
             <ul className="mt-8 grid grid-cols-3 gap-3 md:gap-4">
@@ -34,7 +34,7 @@ export function Network() {
               ))}
             </ul>
 
-            <h3 className="mt-14 text-xl font-semibold text-ink">Our leadership’s experience spans</h3>
+            <h3 className="mt-10 md:mt-14 text-xl font-semibold text-ink">Our leadership’s experience spans</h3>
             <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-4">
               {leadershipExperience.map((n) => (
                 <li key={n} className="font-display text-xl font-semibold text-ink/80 [font-stretch:115%] md:text-2xl">

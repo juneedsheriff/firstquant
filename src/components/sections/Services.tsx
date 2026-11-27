@@ -28,7 +28,7 @@ export function Services() {
   };
 
   return (
-    <section id="services" aria-labelledby="services-title" className="bg-white py-24 md:py-36">
+    <section id="services" aria-labelledby="services-title" className="bg-white py-16 md:py-24 lg:py-36">
       <div className="container-fq">
         <SectionHeading
           id="services-title"
@@ -36,7 +36,7 @@ export function Services() {
           intro="Most developers hire separate firms for strategy, branding, marketing and sales, then spend months aligning them. We run all six as one system, accountable to one outcome."
         />
 
-        <Reveal className="mt-16 grid gap-8 lg:mt-20 lg:grid-cols-12 lg:gap-12">
+        <Reveal className="mt-10 grid gap-6 md:mt-16 lg:mt-20 lg:grid-cols-12 lg:gap-12">
           <div role="tablist" aria-label="Transformations" aria-orientation="vertical" className="flex gap-2 overflow-x-auto pb-2 lg:col-span-5 lg:flex-col lg:gap-0 lg:overflow-visible lg:pb-0">
             {transformations.map((t, i) => {
               const selected = i === active;
@@ -77,7 +77,7 @@ export function Services() {
             id={`${baseId}-panel`}
             aria-labelledby={`${baseId}-tab-${current.id}`}
             tabIndex={0}
-            className="relative overflow-hidden rounded-[2rem] bg-midnight p-8 text-white md:p-12 lg:col-span-7"
+            className="relative overflow-hidden rounded-[2rem] bg-midnight p-6 text-white sm:p-8 md:p-12 lg:col-span-7"
           >
             <p
               aria-hidden="true"
@@ -87,8 +87,8 @@ export function Services() {
             </p>
             <div key={current.id} className="anim-rise relative" style={{ animationDuration: "0.6s" }}>
               <h3 className="display-md max-w-md">{current.title}</h3>
-              <p className="mt-5 max-w-lg text-lg leading-relaxed text-ice/80">{current.body}</p>
-              <ul className="mt-10 flex flex-wrap gap-2.5">
+              <p className="mt-4 max-w-lg leading-relaxed text-ice/80 md:mt-5 md:text-lg">{current.body}</p>
+              <ul className="mt-8 flex flex-wrap gap-2 md:mt-10 md:gap-2.5">
                 {current.services.map((s) => (
                   <li key={s} className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-ice">
                     {s}
@@ -110,8 +110,8 @@ function ArchitectureBlock() {
   const baseId = useId();
 
   return (
-    <Reveal className="mt-24 grid overflow-hidden rounded-[2rem] bg-mist lg:mt-32 lg:grid-cols-12">
-      <div className="relative min-h-72 lg:col-span-5">
+    <Reveal className="mt-14 grid overflow-hidden rounded-[2rem] bg-mist md:mt-24 lg:mt-32 lg:grid-cols-12">
+      <div className="relative min-h-56 sm:min-h-72 lg:col-span-5">
         <Image
           src="/images/architecture/glass-tower.jpg"
           alt="A glass office tower rising against a pale sky"
@@ -120,14 +120,14 @@ function ArchitectureBlock() {
           className="object-cover"
         />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-midnight/80 to-midnight/10" />
-        <div className="absolute inset-x-0 bottom-0 p-8 text-white md:p-10">
+        <div className="absolute inset-x-0 bottom-0 p-6 text-white md:p-10">
           <p className="font-display text-lg font-semibold [font-stretch:115%]">
             Market-led design. Development efficiency. Value creation.
           </p>
         </div>
       </div>
 
-      <div className="p-8 md:p-12 lg:col-span-7">
+      <div className="p-6 sm:p-8 md:p-12 lg:col-span-7">
         <h3 className="display-md text-ink">{architecture.title}</h3>
         <p className="mt-4 max-w-2xl leading-relaxed text-steel">{architecture.intro}</p>
 
@@ -142,7 +142,7 @@ function ArchitectureBlock() {
                     aria-expanded={isOpen}
                     aria-controls={`${baseId}-arch-${i}`}
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-4 py-5 text-left text-lg font-semibold text-ink"
+                    className="flex w-full items-center justify-between gap-4 py-4 text-left text-base font-semibold text-ink sm:py-5 sm:text-lg"
                   >
                     {g.title}
                     <Plus

@@ -5,7 +5,7 @@ import { Reveal } from "../Reveal";
 export function Achievements() {
   const [hero, ...rest] = achievements;
   return (
-    <section id="achievements" aria-labelledby="achievements-title" className="bg-mist py-24 md:py-36">
+    <section id="achievements" aria-labelledby="achievements-title" className="bg-mist py-16 md:py-24 lg:py-36">
       <div className="container-fq">
         <SectionHeading
           id="achievements-title"
@@ -13,10 +13,10 @@ export function Achievements() {
           intro="We judge our work the way a developer’s board does: how fast inventory moves, and how much value each unit captures along the way."
         />
 
-        <div className="mt-16 grid gap-4 md:grid-cols-2 lg:mt-20 lg:grid-cols-12">
+        <div className="mt-10 md:mt-16 grid gap-4 md:grid-cols-2 lg:mt-20 lg:grid-cols-12">
           <Reveal className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-gradient-to-br from-cobalt to-[#0a2aa0] p-8 text-white md:col-span-2 md:p-12 lg:col-span-5 lg:row-span-2">
             <p className="text-sm text-white/75">{hero.project}</p>
-            <div className="mt-24">
+            <div className="mt-14 md:mt-24">
               <p className="font-display text-[clamp(4.5rem,7.5vw,7.5rem)] font-bold leading-none tracking-[-0.05em] [font-stretch:108%]">
                 {hero.value}
               </p>
@@ -38,7 +38,7 @@ export function Achievements() {
           ))}
         </div>
 
-        <Reveal as="figure" className="mt-16 grid gap-6 border-t border-ink/10 pt-12 lg:grid-cols-12">
+        <Reveal as="figure" className="mt-10 md:mt-16 grid gap-6 border-t border-ink/10 pt-12 lg:grid-cols-12">
           <blockquote className="lg:col-span-8">
             <p className="font-display text-3xl font-semibold leading-tight text-ink [font-stretch:112%] md:text-5xl">
               “The New Whitefield is Rising.”

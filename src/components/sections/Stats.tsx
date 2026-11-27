@@ -8,9 +8,9 @@ import { ArrowIcon } from "../Button";
 export function Stats() {
   const [lead, ...rest] = stats;
   return (
-    <section aria-labelledby="stats-title" className="relative overflow-hidden bg-midnight-2 py-24 text-white md:py-32">
+    <section aria-labelledby="stats-title" className="relative overflow-hidden bg-midnight-2 py-16 text-white md:py-24 lg:py-32">
       <div aria-hidden="true" className="absolute right-0 top-0 h-full w-1/2 bg-[radial-gradient(ellipse_at_top_right,rgba(28,124,255,0.18),transparent_60%)]" />
-      <div className="container-fq relative grid gap-16 lg:grid-cols-12">
+      <div className="container-fq relative grid gap-10 md:gap-16 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
           <Rail className="mb-7" />
           <h2 id="stats-title" className="display-md text-white">
@@ -49,7 +49,7 @@ export function Stats() {
         </dl>
       </div>
 
-      <div className="container-fq relative mt-20">
+      <div className="container-fq relative mt-12 md:mt-20">
         <Reveal className="grid gap-8 border-t border-white/15 pt-10 sm:grid-cols-3">
           {[
             { k: "22+ years", v: "leading real estate marketing and business transformation" },

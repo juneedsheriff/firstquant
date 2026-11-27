@@ -8,11 +8,11 @@ import { ArrowIcon } from "../Button";
 
 export function Careers() {
   return (
-    <section id="careers" aria-labelledby="careers-title" className="relative overflow-hidden bg-midnight py-24 text-white md:py-36">
+    <section id="careers" aria-labelledby="careers-title" className="relative overflow-hidden bg-midnight py-16 text-white md:py-24 lg:py-36">
       <div className="container-fq">
         <SectionHeading id="careers-title" tone="dark" title="Careers" intro={careers.intro} />
 
-        <div className="mt-16 grid gap-6 lg:mt-20 lg:grid-cols-12">
+        <div className="mt-10 md:mt-16 grid gap-6 lg:mt-20 lg:grid-cols-12">
           <Reveal className="relative min-h-80 overflow-hidden rounded-[2rem] lg:col-span-4">
             <Image
               src="/images/architecture/cantilever.jpg"
@@ -22,7 +22,7 @@ export function Careers() {
               className="object-cover object-bottom opacity-60 grayscale"
             />
             <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-cobalt/80 to-transparent mix-blend-multiply" />
-            <ul className="absolute inset-x-0 bottom-0 space-y-5 p-8">
+            <ul className="absolute inset-x-0 bottom-0 space-y-5 p-6 sm:p-8">
               {careers.values.map((v) => (
                 <li key={v.title}>
                   <p className="font-display text-lg font-semibold [font-stretch:112%]">{v.title}</p>

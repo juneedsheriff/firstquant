@@ -9,7 +9,7 @@ import { ArrowIcon } from "../Button";
 export function Insights() {
   const [lead, ...rest] = insights;
   return (
-    <section id="insights" aria-labelledby="insights-title" className="bg-mist py-24 md:py-36">
+    <section id="insights" aria-labelledby="insights-title" className="bg-mist py-16 md:py-24 lg:py-36">
       <div className="container-fq">
         <SectionHeading
           id="insights-title"
@@ -17,7 +17,7 @@ export function Insights() {
           intro="Notes from the field on positioning, pricing and launching projects in Bengaluru’s residential market."
         />
 
-        <div className="mt-16 grid gap-6 lg:mt-20 lg:grid-cols-12">
+        <div className="mt-10 md:mt-16 grid gap-6 lg:mt-20 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
             <Link href={`/insights/${lead.slug}`} className="group block">
               <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem]">

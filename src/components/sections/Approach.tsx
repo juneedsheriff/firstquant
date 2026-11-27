@@ -26,7 +26,7 @@ export function Approach() {
   };
 
   return (
-    <section id="approach" aria-labelledby="approach-title" className="relative overflow-hidden bg-midnight py-24 text-white md:py-36">
+    <section id="approach" aria-labelledby="approach-title" className="relative overflow-hidden bg-midnight py-16 text-white md:py-24 lg:py-36">
       <div className="container-fq">
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">

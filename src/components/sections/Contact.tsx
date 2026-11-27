@@ -110,8 +110,8 @@ export function Contact() {
   const copy = intros[data.type];
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="bg-white py-24 md:py-36">
-      <div className="container-fq grid gap-16 lg:grid-cols-12 lg:gap-10">
+    <section id="contact" aria-labelledby="contact-title" className="bg-white py-16 md:py-24 lg:py-36">
+      <div className="container-fq grid gap-10 md:gap-16 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
           <Rail className="mb-7" />
           <h2 id="contact-title" className="display-lg text-ink">

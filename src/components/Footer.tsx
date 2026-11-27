@@ -10,7 +10,7 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-midnight pb-[env(safe-area-inset-bottom)] text-ice/80">
       {/* Closing call to action */}
-      <div className="container-fq pt-24 md:pt-32">
+      <div className="container-fq pt-16 md:pt-24 lg:pt-32">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <p className="display-lg text-white lg:col-span-8">
             We don’t manage projects. We transform them.
@@ -24,7 +24,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container-fq mt-20">
+      <div className="container-fq mt-12 md:mt-20">
         <Image
           src="/images/brand/quant-rail.png"
           alt=""
@@ -50,7 +50,7 @@ export function Footer() {
           </p>
         </div>
 
-        <nav aria-label="Footer" className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:col-span-1 lg:col-span-5">
+        <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 md:col-span-1 md:grid-cols-2 lg:col-span-5 lg:grid-cols-3">
           <div>
             <h2 className="text-sm font-semibold text-white">Company</h2>
             <ul className="mt-5 space-y-3">
@@ -75,6 +75,7 @@ export function Footer() {
               {projects.slice(0, 6).map((p) => (
                 <li key={p.slug}><Link href={`/work/${p.slug}`} className="hover:text-white">{p.name}</Link></li>
               ))}
+              <li><Link href="/work" className="font-semibold text-white hover:text-ice">All work</Link></li>
             </ul>
           </div>
         </nav>

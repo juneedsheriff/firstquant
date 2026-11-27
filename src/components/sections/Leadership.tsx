@@ -9,14 +9,14 @@ import { Reveal } from "../Reveal";
 
 export function Leadership() {
   return (
-    <section id="leadership" aria-labelledby="leadership-title" className="bg-white py-24 md:py-36">
+    <section id="leadership" aria-labelledby="leadership-title" className="bg-white py-16 md:py-24 lg:py-36">
       <div className="container-fq">
         <SectionHeading
           id="leadership-title"
           title="Leadership"
           intro="More than five decades of combined experience across Bengaluru’s most respected developers, now focused on one question: what will make this project succeed?"
         />
-        <ul className="mt-16 grid gap-10 md:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-6">
+        <ul className="mt-10 md:mt-16 grid gap-10 md:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-6">
           {leaders.map((l, i) => (
             <Reveal as="li" key={l.name} delay={i * 100} className={i === 1 ? "lg:mt-20" : ""}>
               <LeaderCard leader={l} />
