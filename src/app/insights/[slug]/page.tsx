@@ -45,7 +45,7 @@ export default async function InsightPage({ params }: Props) {
           publisher: { "@type": "Organization", name: site.name },
         }}
       />
-      <PageHero back={{ href: "/#insights", label: "All insights" }}>
+      <PageHero back={{ href: "/insights", label: "All insights" }}>
         <div className="mt-6 max-w-4xl">
           <p className="text-ice/70">
             {a.category} <span aria-hidden="true" className="mx-2">/</span>
@@ -59,7 +59,7 @@ export default async function InsightPage({ params }: Props) {
 
       <article className="bg-white py-12 md:py-16">
         <div className="container-fq">
-          <div className="relative mx-auto aspect-[16/8] max-w-5xl overflow-hidden rounded-[2rem]">
+          <div className="relative mx-auto aspect-[16/8] max-w-5xl overflow-hidden rounded-2xl">
             <Image src={a.image} alt="" fill priority sizes="(min-width: 1024px) 64rem, 100vw" className="object-cover" />
           </div>
           <div className="mx-auto mt-10 md:mt-14 max-w-[40rem] space-y-6 text-lg leading-[1.75] text-ink/85">
@@ -76,7 +76,7 @@ export default async function InsightPage({ params }: Props) {
           <ul className="mt-8 grid gap-6 md:grid-cols-2">
             {more.map((m) => (
               <li key={m.slug}>
-                <Link href={`/insights/${m.slug}`} className="group flex h-full flex-col rounded-[1.75rem] bg-white p-6 sm:p-8">
+                <Link href={`/insights/${m.slug}`} className="group flex h-full flex-col rounded-2xl bg-white p-6 sm:p-8">
                   <p className="text-sm text-steel">{m.category}</p>
                   <h3 className="mt-2 font-display text-2xl font-semibold text-ink [font-stretch:110%] group-hover:text-cobalt">{m.title}</h3>
                   <p className="mt-3 text-steel">{m.excerpt}</p>

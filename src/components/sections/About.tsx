@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Rail } from "../Rail";
+import { Kicker } from "../SectionHeading";
 import { Reveal } from "../Reveal";
 
 const beliefs = ["Every project has value.", "Every brand has potential.", "Every market has opportunity."];
@@ -19,7 +19,7 @@ export function About() {
       <div className="container-fq">
         <div className="grid gap-10 md:gap-16 lg:grid-cols-12 lg:gap-10">
           <Reveal className="lg:col-span-7">
-            <Rail className="mb-7" />
+            <Kicker section="about" className="mb-6" />
             <h2 id="about-title" className="display-lg text-ink">
               An extension of your leadership team, not another agency.
             </h2>
@@ -34,7 +34,7 @@ export function About() {
               </p>
             </div>
 
-            <div className="mt-10 md:mt-14 rounded-[1.75rem] bg-white p-8 md:p-10">
+            <div className="mt-10 md:mt-14 rounded-2xl bg-white p-8 md:p-10">
               <h3 className="text-xl font-semibold text-ink">One integrated growth model</h3>
               <p className="mt-2 max-w-lg text-steel">
                 Whether we’re reviving an underperforming asset, repositioning an established brand or launching a
@@ -52,7 +52,7 @@ export function About() {
           </Reveal>
 
           <Reveal className="relative lg:col-span-5 lg:pl-6" delay={150}>
-            <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem]">
+            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl">
               <Image
                 src="/images/architecture/cantilever.jpg"
                 alt="A cantilevered concrete building with stacked balconies, in black and white"
@@ -62,7 +62,7 @@ export function About() {
               />
               <div aria-hidden="true" className="absolute inset-0 bg-cobalt/25 mix-blend-multiply" />
             </div>
-            <figure className="relative -mt-24 ml-6 mr-0 rounded-[1.75rem] bg-midnight p-6 sm:p-8 text-white shadow-2xl shadow-midnight/30 md:-mt-32 md:ml-12">
+            <figure className="relative -mt-24 ml-6 mr-0 rounded-2xl bg-midnight p-6 sm:p-8 text-white shadow-[0_8px_24px_color-mix(in_oklab,var(--color-midnight)_12%,transparent)] md:-mt-32 md:ml-12">
               <blockquote>
                 <p className="font-display text-2xl font-semibold leading-snug [font-stretch:110%]">
                   Success is never determined by location alone. It’s shaped by strategy, perception, timing and
@@ -74,7 +74,7 @@ export function About() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-14 md:mt-24 grid gap-px overflow-hidden rounded-[1.75rem] bg-ink/10 md:grid-cols-3">
+        <Reveal className="mt-14 md:mt-24 grid gap-px overflow-hidden rounded-2xl bg-ink/10 md:grid-cols-3">
           {beliefs.map((b) => (
             <p
               key={b}

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { validateEnquiry, type EnquiryPayload } from "@/lib/enquiry";
+import { emailConfigured, sendEnquiryEmail } from "@/lib/mailer";
+import { site } from "@/lib/content";
 
 export const runtime = "nodejs";
 
@@ -41,7 +43,7 @@ export async function POST(req: Request) {
   }
 
   const enquiry = {
-    type: body.type,
+    type: body.type!, // validateEnquiry has confirmed it is one of the known types
     name: body.name!.trim(),
     email: body.email!.trim(),
     phone: body.phone!.trim(),
@@ -54,23 +56,37 @@ export async function POST(req: Request) {
   };
 
   const webhook = process.env.ENQUIRY_WEBHOOK_URL;
-  if (webhook) {
-    try {
+  const email = emailConfigured();
+
+  if (!email && !webhook) {
+    // Never tell a visitor "sent" when nothing will receive it.
+    if (process.env.NODE_ENV === "production") {
+      console.error("[enquiry] no delivery configured: set the SMTP_* and ENQUIRY_TO variables");
+      return NextResponse.json(
+        { ok: false, message: `Our enquiry form is unavailable right now. Please email us at ${site.email}.` },
+        { status: 503 },
+      );
+    }
+    console.info("[enquiry] received in development (no SMTP_* or ENQUIRY_WEBHOOK_URL set)", enquiry);
+    return NextResponse.json({ ok: true });
+  }
+
+  try {
+    if (email) await sendEnquiryEmail(enquiry);
+    if (webhook) {
       const res = await fetch(webhook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: `New ${enquiry.type} enquiry from ${enquiry.name}`, enquiry }),
       });
       if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
-    } catch (err) {
-      console.error("[enquiry] forwarding failed", err);
-      return NextResponse.json(
-        { ok: false, message: "Your enquiry couldn’t be sent right now. Try again in a few minutes." },
-        { status: 502 },
-      );
     }
-  } else {
-    console.info("[enquiry] received (set ENQUIRY_WEBHOOK_URL to forward)", enquiry);
+  } catch (err) {
+    console.error("[enquiry] delivery failed", err);
+    return NextResponse.json(
+      { ok: false, message: `Your enquiry couldn’t be sent right now. Try again in a few minutes, or email us at ${site.email}.` },
+      { status: 502 },
+    );
   }
 
   return NextResponse.json({ ok: true });

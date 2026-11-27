@@ -13,20 +13,36 @@ export const site = {
   description:
     "First Quant is the real estate transformation vertical of Brim First. We work as an extension of a developer’s leadership team, taking strategic ownership of a project from concept to market leadership.",
   city: "Bengaluru, India",
-  email: "hello@firstquant.in", // PLACEHOLDER: confirm the enquiry inbox
-  phone: "+91 00000 00000", // PLACEHOLDER: add the real number
+  email: "hello@firstquant.in",
+  phone: "+91 98860 35099",
   address: "Bengaluru, Karnataka, India", // PLACEHOLDER: add the office address
   linkedin: "https://www.linkedin.com/", // PLACEHOLDER: company page URL
 };
 
+/**
+ * Running labels above each home-page section, numbered in page order.
+ * Keep this in step with the order in app/page.tsx.
+ */
+export const sectionKickers = {
+  about: ["01", "Who we are"],
+  services: ["02", "Six transformations"],
+  coreServices: ["03", "Architecture, strategy, execution"],
+  work: ["04", "Selected work"],
+  network: ["05", "Partners"],
+  approach: ["06", "Method"],
+  achievements: ["07", "Results"],
+  leadership: ["08", "People"],
+  contact: ["09", "Contact"],
+} as const;
+
 export const navigation = [
   { label: "About", href: "/#about" },
-  { label: "Services", href: "/#services" },
+  { label: "What we do", href: "/#services" },
+  { label: "Core services", href: "/#core-services" },
   { label: "Work", href: "/#work" },
   { label: "Approach", href: "/#approach" },
-  { label: "Leadership", href: "/#leadership" },
-  { label: "Insights", href: "/#insights" },
-  { label: "Careers", href: "/#careers" },
+  { label: "Leadership", href: "/leadership" },
+  { label: "Insights", href: "/insights" },
 ];
 
 export const quant = [
@@ -109,7 +125,7 @@ export const transformations = [
   {
     id: "market",
     title: "Market transformation",
-    body: "Building complete go-to-market strategies for successful project launches.",
+    body: "Developing comprehensive go-to-market strategies for successful project launches.",
     services: ["Launch planning", "Launch calendar", "Sales journey design", "Customer experience strategy", "Experience centre planning", "Sample villa strategy"],
   },
   {
@@ -128,32 +144,37 @@ export const transformations = [
 
 export const architecture = {
   title: "Architectural and development strategy",
-  intro:
-    "Architecture at First Quant begins with the market, not the building. We partner with developers from land evaluation and feasibility through design development, turning market intelligence, customer preferences and financial objectives into commercially viable concepts.",
+  tagline: "Market-led design. Development efficiency. Value creation.",
+  /** Deck slide 5. */
+  paragraphs: [
+    "At First Quant, architecture begins with understanding the market, not simply designing a building.",
+    "We partner with developers from land evaluation and project feasibility through architectural planning and design development, translating market intelligence, customer preferences and financial objectives into commercially viable development concepts.",
+    "By aligning architectural vision with product demand, saleable-area optimisation, functional planning and development economics, we help developers create projects that are distinctive in design, efficient in execution and positioned to maximise revenue potential.",
+  ],
   groups: [
     {
-      title: "Land intelligence and feasibility",
+      title: "Land intelligence and development feasibility",
       items: ["Land and location assessment", "Market demand and competition analysis", "Development potential and planning-control review", "Preliminary feasibility and financial modelling", "Development brief and product-mix recommendations"],
     },
     {
-      title: "Concept and product planning",
-      items: ["Architectural vision and concept development", "Site planning, massing and layout options", "Apartment configurations and typical-floor planning", "Façade concepts, elevations and design identity", "Customer-led product differentiation"],
+      title: "Architectural concept and product planning",
+      items: ["Architectural vision and concept development", "Site planning, building massing and layout options", "Apartment configurations and typical-floor planning", "Façade concepts, elevations and design identity", "Customer-led product planning and differentiation"],
     },
     {
-      title: "Design efficiency",
-      items: ["Saleable-area and efficiency studies", "Unit-mix and configuration optimisation", "Core, circulation and common-area efficiency", "Floor-plate and layout optimisation", "Revenue potential of planning options"],
+      title: "Design efficiency and saleable-area optimisation",
+      items: ["Saleable-area and area-efficiency studies", "Unit-mix and configuration optimisation", "Core, circulation and common-area efficiency", "Floor-plate and layout optimisation", "Revenue-potential assessment of planning options"],
     },
     {
-      title: "Design development and coordination",
-      items: ["Final plans, sections and elevations", "Façade composition and materials", "Coordination with structural and MEP consultants", "Design decisions aligned to cost and feasibility"],
+      title: "Design development and technical coordination",
+      items: ["Finalisation of floor plans, sections and elevations", "Façade composition, materials and architectural elements", "Coordination with structural and MEP consultants", "Resolution of design interfaces and typical details", "Alignment of design decisions with cost and feasibility objectives"],
     },
     {
       title: "Statutory and construction documentation",
-      items: ["Drawings for statutory submissions", "Liaison with approval consultants", "Good-for-Construction (GFC) drawings", "Door, window, kitchen, toilet, staircase and façade details"],
+      items: ["Coordination of architectural drawings for statutory submissions", "Liaison with appointed approval consultants", "Good-for-Construction (GFC) architectural drawings", "Door, window, flooring, kitchen and toilet details", "Ceiling, staircase, core and façade details, as applicable", "Typical construction and enlarged architectural details"],
     },
     {
-      title: "Construction-stage coordination",
-      items: ["Architectural clarifications for the project team", "Review of execution-related design queries", "Revisions arising from site conditions", "Ongoing consultant coordination"],
+      title: "Construction-stage design coordination",
+      items: ["Architectural clarifications for the project team", "Review of execution-related design queries", "Coordination of agreed revisions arising from site conditions", "Coordination with architectural, structural and MEP consultants"],
     },
   ],
 };
@@ -165,7 +186,7 @@ export const solutions = {
     { title: "Go-to-market strategy", items: ["Launch planning", "Launch calendar", "Sales journey design", "Customer experience strategy", "Experience centre planning", "Sample villa strategy"] },
   ],
   execution: [
-    { title: "Marketing transformation", items: ["Integrated marketing strategy", "Digital marketing", "ATL and BTL", "PR and media", "Influencer marketing", "Content strategy", "CRM strategy", "Performance marketing"] },
+    { title: "Marketing transformation", items: ["Integrated marketing strategy", "Digital marketing", "ATL and BTL", "PR and media", "Influencer marketing", "Content strategy", "CRM strategy", "Automation", "Performance marketing"] },
     { title: "Sales acceleration", items: ["Sales process design", "Retail sales strategy", "Channel partner strategy", "International sales", "Sales training", "Lead management", "Conversion framework", "Sales analytics"] },
     { title: "Business operations", items: ["CRM implementation", "Marketing automation", "MIS and dashboards", "Vendor ecosystem", "Budget management", "Marketing governance", "KPI framework"] },
   ],
@@ -715,20 +736,26 @@ export const projects: Project[] = [
   },
 ];
 
-/** Portfolio figures from the Sowparnika Group mandate, FY23–24 and FY24–25. */
-export const stats = [
-  { value: 179.35, prefix: "₹", suffix: " Cr", decimals: 2, label: "Marketing-influenced sales" },
-  { value: 99423, suffix: "+", label: "Qualified leads generated" },
-  { value: 7287, label: "Site visits" },
-  { value: 867, label: "Gross bookings" },
-  { value: 1900, label: "Units launched" },
-  { value: 67, suffix: "%", label: "Customer base growth" },
-];
-
-export const developers = [
-  { name: "Sowparnika Projects", logo: "/images/brand/sowparnika.png", w: 600, h: 365 },
-  { name: "Merusri Developers", logo: "/images/brand/merusri.png", w: 302, h: 280 },
-  { name: "Peram Group", logo: "/images/brand/peram.jpg", w: 500, h: 500 },
+/**
+ * Client logos for the strip below the hero. The first six come from each client's own website;
+ * the rest are cut out of the project images on Behance (those clients have no live site).
+ * `tall` gives compact marks more height so they balance against wide wordmarks.
+ */
+export const clientLogos: { name: string; src: string; w: number; h: number; tall?: boolean }[] = [
+  { name: "Sowparnika Projects", src: "/images/clients/sowparnika.png", w: 237, h: 144 },
+  { name: "Mantri Developers", src: "/images/clients/mantri.png", w: 98, h: 73, tall: true },
+  { name: "Merusri Developers", src: "/images/clients/merusri.svg", w: 244, h: 76 },
+  { name: "Peram Group", src: "/images/clients/peram.png", w: 411, h: 144 },
+  { name: "Axis Capstone", src: "/images/clients/axis.png", w: 196, h: 144, tall: true },
+  { name: "ELV Projects", src: "/images/clients/elv.png", w: 131, h: 144, tall: true },
+  { name: "Emerge Projects", src: "/images/clients/emerge.png", w: 513, h: 144 },
+  { name: "Maloo Group", src: "/images/clients/maloo.png", w: 164, h: 144, tall: true },
+  { name: "The Prodigies International School", src: "/images/clients/prodigies.png", w: 494, h: 77 },
+  { name: "Vito", src: "/images/clients/vito.png", w: 404, h: 144 },
+  { name: "Floorzy Makeover", src: "/images/clients/floorzy.png", w: 416, h: 144 },
+  { name: "Leathercraft", src: "/images/clients/leathercraft.png", w: 215, h: 144, tall: true },
+  { name: "Karmy", src: "/images/clients/karmy.png", w: 259, h: 144, tall: true },
+  { name: "Mysimbha", src: "/images/clients/mysimbha.png", w: 659, h: 144 },
 ];
 
 /** Organisations the leadership team has worked with in earlier roles (from the deck bios). */
